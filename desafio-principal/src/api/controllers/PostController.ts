@@ -1,5 +1,6 @@
 import type { Request, Response } from 'express';
 import Post from '../models/Post.js';
+import Comentario from '../models/Comentario.js';
 
 class PostController {
     async create(req: Request, res: Response) {
@@ -22,7 +23,9 @@ class PostController {
 
     async findAll(req: Request, res: Response) {
         try {
-            const posts = await Post.findAll();
+            const posts = await Post.findAll({
+                include: Comentario
+            });
             if(!posts){
                 return res.status(400).json({message: 'Não existem posts a serem exibidos'})
             }
