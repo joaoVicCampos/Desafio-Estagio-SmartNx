@@ -31,8 +31,7 @@ class PostController {
             return res.status(500).json({message: 'Erro ao encontrar posts', error});
         }
     }
-
-    async delete(req: Request, res: Response){
+      async delete(req: Request, res: Response){
         try {
             const postId = req.params.id;
             const postDeletado = await Post.destroy({
