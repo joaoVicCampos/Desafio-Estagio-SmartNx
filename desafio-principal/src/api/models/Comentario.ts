@@ -22,7 +22,7 @@ Post.hasMany(Comentario, {
     foreignKey: 'postId',
 });
 
-Comentario.hasOne(Post, {
+Comentario.belongsTo(Post, {
     foreignKey: 'postId'
 })
 
