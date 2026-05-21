@@ -18,4 +18,12 @@ const Comentario = sequelize.define('Comentario', {
     }
 });
 
+Post.hasMany(Comentario, {
+    foreignKey: 'postId',
+});
+
+Comentario.hasOne(Post, {
+    foreignKey: 'postId'
+})
+
 export default Comentario;
