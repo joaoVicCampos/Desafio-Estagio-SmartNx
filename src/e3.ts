@@ -7,8 +7,3 @@ const printStrs2 = ManyArgs("Hello", "World");
 
 console.log(printStrs1);
 console.log(printStrs2);
-
-
-
-
-
