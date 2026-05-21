@@ -6,11 +6,16 @@ class ComentarioController {
     async create(req: Request, res: Response){
         try {
             const postId = Number(req.params.postId);
-            const post = await Post.findByPk(postId)
+            
             const {conteudo} = req.body;
             if (!conteudo) {
                 return  res.status(400).json({message: 'Comentário sem conteúdo'})
             }
+            const post = await Post.findByPk(postId)
+            if (!post) {
+                return  res.status(404).json({message: 'Post não encontrado'})
+            }
+            
             const comentario = await Comentario.create({
                 conteudo,
                 postId
