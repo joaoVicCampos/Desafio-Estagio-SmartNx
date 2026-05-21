@@ -1,5 +1,6 @@
 import mysql from 'mysql2/promise';
 import 'dotenv/config';
+import { Sequelize } from 'sequelize';
 
 const {
   DB_HOST,
@@ -12,11 +13,9 @@ if (!DB_HOST || !DB_USER || !DB_PASSWORD || !DB_NAME) {
   throw new Error('Variáveis de ambiente do banco não configuradas.');
 }
 
-const pool = mysql.createPool({
+const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASSWORD , {
   host: DB_HOST,
-  user: DB_USER,
-  password: DB_PASSWORD,
-  database: DB_NAME,
-});
+  dialect: 'mysql'
+})
 
-export default pool;
+export default sequelize;
