@@ -19,6 +19,33 @@ class PostController {
             
         }
     }
+
+    async findAll(req: Request, res: Response) {
+        try {
+            const posts = await Post.findAll();
+            if(!posts){
+                return res.status(400).json({message: 'Não existem posts a serem exibidos'})
+            }
+            return res.status(200).json(posts);
+        } catch (error) {
+            return res.status(500).json({message: 'Erro ao encontrar posts', error});
+        }
+    }
+
+    async delete(req: Request, res: Response){
+        try {
+            const postId = req.params.id;
+            const postDeletado = await Post.destroy({
+                where: {id: postId}
+            })
+            if(postDeletado){
+                return res.status(200).json({message: 'Post deletado com sucesso'})
+            }
+            return res.status(404).json({message: 'Post não econtrado'})
+        } catch (error) {
+            return res.status(500).json({message: 'Erro ao deletar o post', error})
+        }
+    }
 }
 
 export default new PostController();
